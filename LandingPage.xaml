@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PatientRecordsSecurity.LandingPage"
+             Title="LandingPage">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" VerticalOptions="Center">
+            <Label 
+        Text="Design and Implementation of Data Security for Patient Records"
+        FontSize="20"
+        FontAttributes="Bold"
+        TextColor="#2A4D69"
+        HorizontalTextAlignment="Center"
+        AbsoluteLayout.LayoutBounds="0.5, 0.05, 800, 25"
+        AbsoluteLayout.LayoutFlags="None"/>
+
+            <Image  
+        Source="security_icon.png"
+        Aspect="AspectFit"
+        WidthRequest="100"
+        HeightRequest="100" />
+
+            <Label  
+        Text="Full Name: Adewale Damilola Opeyemi"
+        FontSize="16" 
+        HorizontalOptions="Center"/>
+
+            <Label  
+        Text="Matric No: CS/HND/F22/3336"
+        FontSize="16"
+        FontAttributes="Bold" 
+        HorizontalOptions="Center"/>
+
+            <Label 
+        Text="Supervisor Name: Mr. Jimoh H.O"
+        FontSize="16"
+        FontAttributes="Italic"
+        HorizontalOptions="Center"/>
+
+            <Grid HorizontalOptions="FillAndExpand" Padding="10">
+                <Image  
+        Source="university_logo.png"
+        Aspect="AspectFit"
+        WidthRequest="120"
+        HeightRequest="50"
+        HorizontalOptions="Start"/>
+
+                <Label  
+        Text="Submission Date: August 2024"
+        FontSize="16"
+        TextColor="Maroon"
+                VerticalOptions="Center"
+        HorizontalOptions="EndAndExpand"/>
+            </Grid>
+
+            <Grid HorizontalOptions="CenterAndExpand" ColumnDefinitions="auto,auto" ColumnSpacing="40">
+                <Button  
+                 Grid.Column="0"
+         Text="Sign Up"
+         BackgroundColor="#1AB89C"
+         TextColor="White"
+         FontAttributes="Bold"
+         WidthRequest="100"
+         HeightRequest="40" 
+                HorizontalOptions="StartAndExpand"
+            Clicked="Button_Clicked"/>
+
+                <Button  
+                Grid.Column="1"
+         Text="Sign In"
+         BackgroundColor="#34495E"
+         TextColor="White"
+         FontAttributes="Bold"
+         WidthRequest="100"
+         HeightRequest="40" 
+                HorizontalOptions="EndAndExpand"
+            Clicked="Button_Clicked_1"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

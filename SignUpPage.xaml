@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PatientRecordsSecurity.SignUpPage"
+             Title="SignUpPage">
+    <ScrollView>
+        
+    <VerticalStackLayout Padding="20">
+
+        <Label x:Name="titleLabel"
+               Text="Design and Implementation of Data Security for Patient Records"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="#2A4D69"
+               HorizontalTextAlignment="Center"
+               Margin="0,0,0,10"/>
+
+        <Label x:Name="matricNoLabel"
+               Text="By: CS/HND/F22/3336"
+               FontSize="16"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"
+               Margin="0,0,0,20"/>
+
+        <Label x:Name="label1"
+               Text="Register your clinic account with the following information:"
+               FontSize="16"
+               TextColor="#1AB89C"
+               HorizontalTextAlignment="Center"
+               Margin="0,0,0,20"/>
+
+        <Label x:Name="clinicNameLabel"
+               Text="Clinic Name:"
+               FontSize="16"
+               Margin="0,0,0,5"/>
+
+        <Entry x:Name="clinicNameTextBox"
+               FontSize="16"
+               Placeholder="Enter your clinic name"
+               Margin="0,0,0,20"/>
+
+        <Label x:Name="phoneLabel"
+               Text="Phone:"
+               FontSize="16"
+               Margin="0,0,0,5"/>
+
+        <Entry x:Name="phoneTextBox"
+               FontSize="16"
+               Placeholder="Enter your phone number"
+               Margin="0,0,0,20"/>
+
+        <Label x:Name="emailLabel"
+               Text="Email:"
+               FontSize="16"
+               Margin="0,0,0,5"/>
+
+        <Entry x:Name="emailTextBox"
+               FontSize="16"
+               Placeholder="Enter your email"
+               Margin="0,0,0,20"/>
+
+        <Label x:Name="usernameLabel"
+               Text="Username:"
+               FontSize="16"
+               Margin="0,0,0,5"/>
+
+        <Entry x:Name="usernameTextBox"
+               FontSize="16"
+               Placeholder="Enter your username"
+               Margin="0,0,0,20"/>
+
+        <Label x:Name="passwordLabel"
+               Text="Password:"
+               FontSize="16"
+               Margin="0,0,0,5"/>
+
+        <Entry x:Name="passwordTextBox"
+               FontSize="16"
+               IsPassword="True"
+               Placeholder="Enter your password"
+               Margin="0,0,0,20"/>
+
+        <Button x:Name="signUpButton"
+                Text="Sign Up"
+                BackgroundColor="#1AB89C"
+                TextColor="White"
+                FontAttributes="Bold"
+                HeightRequest="40"
+                Clicked="signUpButton_Clicked"
+                Margin="0,20,0,20"/>
+
+        <Label x:Name="button1"
+       Text="Already have an account? "
+       FontSize="16"
+       TextColor="#34495E"
+               HorizontalOptions="Center"/>
+
+        <Button x:Name="loginLinkButton"
+        Text="Sign In"
+        FontSize="16"
+        TextColor="Blue"
+        BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+        Clicked="loginLinkButton_Clicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

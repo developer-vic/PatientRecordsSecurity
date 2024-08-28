@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PatientRecordsSecurity.MainPage">
+
+    <Grid ColumnDefinitions="Auto,*" HorizontalOptions="FillAndExpand">
+        <!-- Sidebar -->
+        <VerticalStackLayout Grid.Row="0" Grid.Column="0" WidthRequest="250" BackgroundColor="#2c3e50">
+            <!-- User Information Panel -->
+            <Grid Padding="5,20" BackgroundColor="#34495e" RowDefinitions="auto" ColumnDefinitions="auto,*">
+                <Image Grid.RowSpan="1" Grid.Column="0" Source="doctor.png" WidthRequest="80" HeightRequest="50" Aspect="AspectFill"/>
+                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                    <Label Text="User Name" TextColor="White" FontSize="18"/>
+                    <Label Grid.Column="1" Text="user@example.com" TextColor="White" FontSize="14"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Sidebar Menu -->
+            <ScrollView VerticalOptions="FillAndExpand">
+                <VerticalStackLayout>
+
+                    <Grid BackgroundColor="#2c3e50" Padding="20,0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="ManageStaffDrop" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="Manage Staff" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        <Image Source="{Binding ManageStaffDrop}" WidthRequest="20" HorizontalOptions="End" Margin="10,20"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding ManageStaffMenuVisible}" BackgroundColor="#34495e">
+                        <Button Text="Add New Staff" Command="{Binding MyCommand}" CommandParameter="StaffAddEdit" BackgroundColor="#34495e" TextColor="White"/>
+                        <Button Text="View All Staffs" Command="{Binding MyCommand}" CommandParameter="StaffViewAll" BackgroundColor="#34495e" TextColor="White"/>
+                        <Button Text="Edit Permissions" BackgroundColor="#34495e" TextColor="White"/>
+                    </StackLayout>
+                    <BoxView HeightRequest="5" Color="#34495e" />
+
+                    
+                    <Grid BackgroundColor="#2c3e50" Padding="20,0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="ManageAccessDrop" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="Manage Access" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        <Image Source="{Binding ManageAccessDrop}" WidthRequest="20" HorizontalOptions="End" Margin="10,20"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding ManageAccessMenuVisible}" BackgroundColor="#34495e">
+                        <Button Text="View User Access" BackgroundColor="#34495e" TextColor="White"/>
+                        <Button Text="Add User Access" BackgroundColor="#34495e" TextColor="White"/>
+                    </StackLayout>
+                    <BoxView HeightRequest="5" Color="#34495e" />
+
+
+                    <Grid BackgroundColor="#2c3e50" Padding="20,0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="ManagePatientDrop" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="Manage Patient" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        <Image Source="{Binding ManagePatientDrop}" WidthRequest="20" HorizontalOptions="End" Margin="10,20"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding ManagePatientMenuVisible}"  BackgroundColor="#34495e">
+                        <Button Text="Add New Patient" BackgroundColor="#34495e" TextColor="White"/>
+                        <Button Text="View Patient Records" BackgroundColor="#34495e" TextColor="White"/>
+                    </StackLayout>
+                    <BoxView HeightRequest="5" Color="#34495e" />
+
+
+                    <Grid BackgroundColor="#2c3e50" Padding="20,0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="SettingsDrop" />
+                        </Grid.GestureRecognizers>
+                        <Label Text="Settings" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        <Image Source="{Binding SettingsDrop}" WidthRequest="20" HorizontalOptions="End" Margin="10,20"/>
+                    </Grid>
+                    <StackLayout IsVisible="{Binding SettingsMenuVisible}"  BackgroundColor="#34495e">
+                        <Grid BackgroundColor="#34495e" Padding="35,0,10,0">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="PasswordDrop" />
+                            </Grid.GestureRecognizers>
+                            <Label Text="Change Password" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                            <Image Source="{Binding PasswordDrop}" WidthRequest="20" HorizontalOptions="End" Margin="10,20"/>
+                        </Grid>
+                        <StackLayout IsVisible="{Binding PasswordMenuVisible}" >
+                            <Button Text="Admin" BackgroundColor="#2c3e50" TextColor="White"/>
+                            <BoxView HeightRequest="5" Color="#34495e" />
+                            <Button Text="User" BackgroundColor="#2c3e50" TextColor="White"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <BoxView HeightRequest="5" Color="#34495e" />
+                    <BoxView HeightRequest="5" Color="#2c3e50" />
+                    <Button Text="Logout" BackgroundColor="#c0392b" TextColor="White"/>
+                </VerticalStackLayout>
+            </ScrollView>
+        </VerticalStackLayout>
+
+        <!-- Main Content Area -->
+        <ScrollView  Grid.Row="1" Grid.Column="1" BackgroundColor="White" Padding="20">
+            <ContentView Content="{Binding CurrentView}">
+            </ContentView>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>
