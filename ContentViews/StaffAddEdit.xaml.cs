@@ -19,7 +19,7 @@ public partial class StaffAddEdit : ContentView
          
         public ObservableCollection<string> Roles { get; } = new ObservableCollection<string>
         {
-            "Doctor", "Nurse"
+            "Doctor", "Nurse", "Others"
         };  
         public ObservableCollection<string> Designations { get; } = new ObservableCollection<string>
         {
@@ -63,9 +63,9 @@ public partial class StaffAddEdit : ContentView
                         break;
                     case "Cancel":
                         if(Title == "Add New Staff")
-                            App.Current.MainPage.BindingContext = new MainPageVM();
+                            VUtils.GetMainPage().BindingContext = new MainPageVM();
                         else
-                            ((MainPageVM)App.Current.MainPage.BindingContext).CurrentView = new StaffViewAll();
+                            ((MainPageVM)VUtils.GetMainPage().BindingContext).CurrentView = new StaffViewAll();
                         break;
                 }
             });

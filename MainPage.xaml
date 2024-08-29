@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
              x:Class="PatientRecordsSecurity.MainPage">
 
     <Grid ColumnDefinitions="Auto,*" HorizontalOptions="FillAndExpand">
@@ -42,8 +43,8 @@
                         <Image Source="{Binding ManageAccessDrop}" WidthRequest="20" HorizontalOptions="End" Margin="10,20"/>
                     </Grid>
                     <StackLayout IsVisible="{Binding ManageAccessMenuVisible}" BackgroundColor="#34495e">
-                        <Button Text="View User Access" BackgroundColor="#34495e" TextColor="White"/>
-                        <Button Text="Add User Access" BackgroundColor="#34495e" TextColor="White"/>
+                        <Button Text="View User Access" BackgroundColor="#34495e" TextColor="White" Command="{Binding MyCommand}" CommandParameter="UserAccessView"/>
+                        <Button Text="Add User Access" BackgroundColor="#34495e" TextColor="White"  Command="{Binding MyCommand}" CommandParameter="UserAccessAdd"/>
                     </StackLayout>
                     <BoxView HeightRequest="5" Color="#34495e" />
 
@@ -56,11 +57,11 @@
                         <Image Source="{Binding ManagePatientDrop}" WidthRequest="20" HorizontalOptions="End" Margin="10,20"/>
                     </Grid>
                     <StackLayout IsVisible="{Binding ManagePatientMenuVisible}"  BackgroundColor="#34495e">
-                        <Button Text="Add New Patient" BackgroundColor="#34495e" TextColor="White"/>
-                        <Button Text="View Patient Records" BackgroundColor="#34495e" TextColor="White"/>
+                        <Button Text="Add New Patient" BackgroundColor="#34495e" TextColor="White" Command="{Binding MyCommand}" CommandParameter="PatientAdd"/>
+                        <Button Text="View Patient Records" BackgroundColor="#34495e" TextColor="White" Command="{Binding MyCommand}" CommandParameter="PatientView"/>
                     </StackLayout>
                     <BoxView HeightRequest="5" Color="#34495e" />
-
+                    
 
                     <Grid BackgroundColor="#2c3e50" Padding="20,0">
                         <Grid.GestureRecognizers>
@@ -78,15 +79,15 @@
                             <Image Source="{Binding PasswordDrop}" WidthRequest="20" HorizontalOptions="End" Margin="10,20"/>
                         </Grid>
                         <StackLayout IsVisible="{Binding PasswordMenuVisible}" >
-                            <Button Text="Admin" BackgroundColor="#2c3e50" TextColor="White"/>
+                            <Button Text="Admin" BackgroundColor="#2c3e50" TextColor="White" Command="{Binding MyCommand}" CommandParameter="ChangePassword"/>
                             <BoxView HeightRequest="5" Color="#34495e" />
-                            <Button Text="User" BackgroundColor="#2c3e50" TextColor="White"/>
+                            <Button Text="User" BackgroundColor="#2c3e50" TextColor="White" Command="{Binding MyCommand}" CommandParameter="ChangePassword"/>
                         </StackLayout>
                     </StackLayout>
 
-                    <BoxView HeightRequest="5" Color="#34495e" />
+                    <BoxView HeightRequest="5" Color="#34495e" /> 
                     <BoxView HeightRequest="5" Color="#2c3e50" />
-                    <Button Text="Logout" BackgroundColor="#c0392b" TextColor="White"/>
+                    <Button Text="Logout" BackgroundColor="#c0392b" TextColor="White" Command="{Binding MyCommand}" CommandParameter="Logout"/>
                 </VerticalStackLayout>
             </ScrollView>
         </VerticalStackLayout>

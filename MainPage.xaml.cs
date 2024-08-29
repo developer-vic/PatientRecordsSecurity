@@ -1,4 +1,5 @@
 ﻿using PatientRecordsSecurity.ContentViews;
+using PatientRecordsSecurity.Controls;
 using System.Windows.Input;
 
 namespace PatientRecordsSecurity
@@ -74,7 +75,25 @@ namespace PatientRecordsSecurity
                         CurrentView = new StaffViewAll();
                         break;
                     case "StaffEditPermission":
-                        CurrentView = new StaffEditPermission();
+                        CurrentView = new StaffEditAddPermission("");
+                        break;
+                    case "UserAccessView":
+                        CurrentView = new UserAccessView();
+                        break;
+                    case "UserAccessAdd":
+                        CurrentView = new StaffEditAddPermission();
+                        break;
+                    case "PatientAdd":
+                        CurrentView = new PatientAddEdit();
+                        break;
+                    case "PatientView":
+                        CurrentView = new PatientView();
+                        break;
+                    case "ChangePassword":
+                        CurrentView = new ChangePassword();
+                        break;
+                    case "Logout":
+                        VUtils.LogOut(); 
                         break;
                 }
             });

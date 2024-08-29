@@ -3,43 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PatientRecordsSecurity.ContentViews.StaffAddEdit">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <VerticalStackLayout Padding="20">
         <Label Text="{Binding Title}" FontSize="20" FontAttributes="Bold" TextColor="#2A4D69" HorizontalOptions="Center" />
 
-        <Label Text="Staff ID" FontSize="14"/>
+        <Label Text="Staff ID" FontSize="14" Margin="0,20,0,0" />
         <Entry Text="{Binding Staff.StaffId}" Placeholder="Enter Staff ID" IsEnabled="{Binding FieldsAreEnable}"/>
 
-        <Label Text="First Name" FontSize="14"/>
+        <Label Text="First Name" FontSize="14" Margin="0,20,0,0" />
         <Entry Text="{Binding Staff.FirstName}" Placeholder="Enter First Name" IsEnabled="{Binding FieldsAreEnable}"/>
 
-        <Label Text="Last Name" FontSize="14"/>
+        <Label Text="Last Name" FontSize="14" Margin="0,20,0,0" />
         <Entry Text="{Binding Staff.LastName}" Placeholder="Enter Last Name" IsEnabled="{Binding FieldsAreEnable}"/>
 
-        <Label Text="Email" FontSize="14"/>
+        <Label Text="Email" FontSize="14" Margin="0,20,0,0" />
         <Entry Text="{Binding Staff.Email}" Placeholder="Enter Email" Keyboard="Email" IsEnabled="{Binding FieldsAreEnable}"/>
 
-        <Label Text="Role" FontSize="14"/>
+        <Label Text="Role" FontSize="14" Margin="0,20,0,0" />
         <StackLayout Orientation="Horizontal" Padding="0,0,0,0" IsEnabled="{Binding FieldsAreEnable}">
             <Picker x:Name="pickerRoles" ItemsSource="{Binding Roles}" SelectedItem="{Binding Staff.Role}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
-            <ImageButton Source="dropdown.png" Command="{Binding PickerCommand}" CommandParameter="{x:Reference pickerRoles}" VerticalOptions="Center" BackgroundColor="Transparent" WidthRequest="30"/>
+            <!--<ImageButton Source="dropdown.png" Command="{Binding PickerCommand}" CommandParameter="{x:Reference pickerRoles}" VerticalOptions="Center" BackgroundColor="Transparent" WidthRequest="30"/>-->
         </StackLayout>
 
-        <Label Text="Designation" FontSize="14"/>
+        <Label Text="Designation" FontSize="14" Margin="0,20,0,0" />
         <StackLayout Orientation="Horizontal" Padding="0,0,0,0" IsEnabled="{Binding FieldsAreEnable}">
             <Picker x:Name="pickerDesignations" ItemsSource="{Binding Designations}" SelectedItem="{Binding SelectedDesignation}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
-            <ImageButton Source="dropdown.png" Command="{Binding PickerCommand}" CommandParameter="{x:Reference pickerDesignations}" VerticalOptions="Center" BackgroundColor="Transparent" WidthRequest="30"/>
+            <!--<ImageButton Source="dropdown.png" Command="{Binding PickerCommand}" CommandParameter="{x:Reference pickerDesignations}" VerticalOptions="Center" BackgroundColor="Transparent" WidthRequest="30"/>-->
         </StackLayout>
 
-        <Label Text="Username" FontSize="14"/> 
+        <Label Text="Username" FontSize="14" Margin="0,20,0,0" /> 
         <Entry Text="{Binding Username}" IsReadOnly="True" />
 
-        <Label Text="Password" FontSize="14"/>
+        <Label Text="Password" FontSize="14" Margin="0,20,0,0" />
         <Entry Text="{Binding Staff.Password}" Placeholder="Enter Password" IsPassword="True" IsEnabled="{Binding FieldsAreEnable}"/>
 
-        <Label Text="Confirm Password" FontSize="14"/>
+        <Label Text="Confirm Password" FontSize="14" Margin="0,20,0,0" />
         <Entry Text="{Binding ConfirmPassword}" Placeholder="Confirm Password" IsPassword="True" IsEnabled="{Binding FieldsAreEnable}"/>
 
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="20">
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Margin="0,20,0,0" >
             <Button Grid.Column="0" Text="Save"  Command="{Binding MyCommand}" CommandParameter="Save" IsVisible="{Binding FieldsAreEnable}" />
             <Button Grid.Column="1" Text="Cancel" BackgroundColor="DarkRed"  Command="{Binding MyCommand}" CommandParameter="Cancel" />
         </Grid>

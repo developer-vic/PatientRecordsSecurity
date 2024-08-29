@@ -1,3 +1,5 @@
+using PatientRecordsSecurity.Controls;
+
 namespace PatientRecordsSecurity;
 
 public partial class LandingPage : ContentPage
@@ -9,11 +11,11 @@ public partial class LandingPage : ContentPage
 
     private void Button_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new SignUpPage();
+        VUtils.GetoPage(new SignUpPage(), true); 
     }
 
     private void Button_Clicked_1(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new SignInPage();
+        VUtils.GetoPage(new SignInPage(), true); 
     }
 }

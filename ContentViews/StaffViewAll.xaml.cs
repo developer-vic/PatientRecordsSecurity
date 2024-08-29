@@ -27,13 +27,8 @@ public partial class StaffViewAll : ContentView
         public ICommand EditStaffCommand => new Command<Staff>(OnEditStaff);
 
         public StaffViewAllVM()
-        { 
-            _staffList = new ObservableCollection<Staff>
-            {
-                new Staff { StaffId = "1", FirstName = "John", LastName = "Doe", Email = "john.doe@example.com", Role = "Doctor", Designation = "Surgeon", Username = "SUR 001", Password = "123" },
-                new Staff { StaffId = "2", FirstName = "Jane", LastName = "Smith", Email = "jane.smith@example.com", Role = "Nurse", Designation = "Orthopedic Nurse", Username = "ORT 001", Password = "12345678" }
-            };
-            StaffList = new ObservableCollection<Staff>(_staffList);
+        {  
+            StaffList = VUtils.GetStaffs();  
         }
 
         private void FilterStaffList()
@@ -53,18 +48,18 @@ public partial class StaffViewAll : ContentView
         }
 
         private void OnAddNewStaff()
-        { 
-            ((MainPageVM)App.Current.MainPage.BindingContext).CurrentView = new StaffAddEdit();
+        {  
+            ((MainPageVM)VUtils.GetMainPage().BindingContext).CurrentView = new StaffAddEdit();
         }
 
         private void OnViewStaff(Staff staff)
         {
-            ((MainPageVM)App.Current.MainPage.BindingContext).CurrentView = new StaffAddEdit(staff, false);
+            ((MainPageVM)VUtils.GetMainPage().BindingContext).CurrentView = new StaffAddEdit(staff, false);
         }
 
         private void OnEditStaff(Staff staff)
         {
-            ((MainPageVM)App.Current.MainPage.BindingContext).CurrentView = new StaffAddEdit(staff);
+            ((MainPageVM)VUtils.GetMainPage().BindingContext).CurrentView = new StaffAddEdit(staff);
         } 
 
     }

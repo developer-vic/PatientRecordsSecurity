@@ -1,3 +1,5 @@
+using PatientRecordsSecurity.Controls;
+
 namespace PatientRecordsSecurity;
 
 public partial class SignInPage : ContentPage
@@ -9,10 +11,10 @@ public partial class SignInPage : ContentPage
 
     private void loginButton_Clicked(object sender, EventArgs e)
     {
-        Application.Current.MainPage = new MainPage();
+        VUtils.GetoPage(new MainPage(), true); 
     } 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        Application.Current.MainPage = new SignUpPage();
+        VUtils.GetoPage(new SignUpPage(), true); 
     }
 }

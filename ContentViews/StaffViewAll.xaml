@@ -5,10 +5,10 @@
              x:Name="StaffViewAllView">
  
     <StackLayout Padding="20" Spacing="15">
-        <Label Text="All Staff" FontSize="20" FontAttributes="Bold" TextColor="#2A4D69" HorizontalOptions="Center" /> 
+        <Label Text="All Staff" FontSize="20" FontAttributes="Bold" TextColor="#2A4D69" HorizontalOptions="Center" />
 
-        <SearchBar Placeholder="Search staff by name, role, or designation"
-                   Text="{Binding SearchText}" />
+        <Label Text="Search staff by name, role, or designation"  FontSize="16" />
+        <SearchBar Placeholder="name, role, or designation" Text="{Binding SearchText}" />
 
         <Button Text="Add New Staff" Command="{Binding AddNewStaffCommand}" />
 
