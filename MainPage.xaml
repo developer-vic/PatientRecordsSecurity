@@ -15,7 +15,7 @@
                 </VerticalStackLayout>
             </Grid>
 
-            <!-- Sidebar Menu -->
+            <!-- Sidebar Menu --> 
             <ScrollView VerticalOptions="FillAndExpand">
                 <VerticalStackLayout>
 
@@ -29,7 +29,7 @@
                     <StackLayout IsVisible="{Binding ManageStaffMenuVisible}" BackgroundColor="#34495e">
                         <Button Text="Add New Staff" Command="{Binding MyCommand}" CommandParameter="StaffAddEdit" BackgroundColor="#34495e" TextColor="White"/>
                         <Button Text="View All Staffs" Command="{Binding MyCommand}" CommandParameter="StaffViewAll" BackgroundColor="#34495e" TextColor="White"/>
-                        <Button Text="Edit Permissions" BackgroundColor="#34495e" TextColor="White"/>
+                        <Button Text="Edit Permissions" Command="{Binding MyCommand}" CommandParameter="StaffEditPermission" BackgroundColor="#34495e" TextColor="White"/>
                     </StackLayout>
                     <BoxView HeightRequest="5" Color="#34495e" />
 
@@ -93,8 +93,7 @@
 
         <!-- Main Content Area -->
         <ScrollView  Grid.Row="1" Grid.Column="1" BackgroundColor="White" Padding="20">
-            <ContentView Content="{Binding CurrentView}">
-            </ContentView>
+            <ContentView Content="{Binding CurrentView}" />
         </ScrollView>
     </Grid>
 
