@@ -7,7 +7,7 @@
         
     <VerticalStackLayout Padding="20">
 
-        <Label x:Name="titleLabel"
+        <Label  
                Text="Design and Implementation of Data Security for Patient Records"
                FontSize="20"
                FontAttributes="Bold"
@@ -15,72 +15,72 @@
                HorizontalTextAlignment="Center"
                Margin="0,0,0,10"/>
 
-        <Label x:Name="matricNoLabel"
+        <Label  
                Text="By: CS/HND/F22/3336"
                FontSize="16"
                FontAttributes="Bold"
                HorizontalTextAlignment="Center"
                Margin="0,0,0,20"/>
 
-        <Label x:Name="label1"
+        <Label 
                Text="Register your clinic account with the following information:"
                FontSize="16"
                TextColor="#1AB89C"
                HorizontalTextAlignment="Center"
                Margin="0,0,0,20"/>
 
-        <Label x:Name="clinicNameLabel"
+        <Label  
                Text="Clinic Name:"
                FontSize="16"
                Margin="0,0,0,5"/>
 
-        <Entry x:Name="clinicNameTextBox"
+            <Entry Text="{Binding Staff.Company}"
                FontSize="16"
                Placeholder="Enter your clinic name"
                Margin="0,0,0,20"/>
 
-        <Label x:Name="phoneLabel"
+        <Label  
                Text="Phone:"
                FontSize="16"
                Margin="0,0,0,5"/>
 
-        <Entry x:Name="phoneTextBox"
+            <Entry Text="{Binding Staff.Phone}"
                FontSize="16"
                Placeholder="Enter your phone number"
                Margin="0,0,0,20"/>
 
-        <Label x:Name="emailLabel"
+        <Label 
                Text="Email:"
                FontSize="16"
                Margin="0,0,0,5"/>
 
-        <Entry x:Name="emailTextBox"
+            <Entry Text="{Binding Staff.Email}"
                FontSize="16"
                Placeholder="Enter your email"
                Margin="0,0,0,20"/>
 
-        <Label x:Name="usernameLabel"
+        <Label
                Text="Username:"
                FontSize="16"
                Margin="0,0,0,5"/>
 
-        <Entry x:Name="usernameTextBox"
+            <Entry Text="{Binding Staff.Username}"
                FontSize="16"
                Placeholder="Enter your username"
                Margin="0,0,0,20"/>
 
-        <Label x:Name="passwordLabel"
+        <Label 
                Text="Password:"
                FontSize="16"
                Margin="0,0,0,5"/>
 
-        <Entry x:Name="passwordTextBox"
+            <Entry Text="{Binding Staff.Password}"
                FontSize="16"
                IsPassword="True"
                Placeholder="Enter your password"
                Margin="0,0,0,20"/>
 
-        <Button x:Name="signUpButton"
+        <Button 
                 Text="Sign Up"
                 BackgroundColor="#1AB89C"
                 TextColor="White"
@@ -89,13 +89,13 @@
                 Clicked="signUpButton_Clicked"
                 Margin="0,20,0,20"/>
 
-        <Label x:Name="button1"
+        <Label 
        Text="Already have an account? "
        FontSize="16"
        TextColor="#34495E"
                HorizontalOptions="Center"/>
 
-        <Button x:Name="loginLinkButton"
+        <Button 
         Text="Sign In"
         FontSize="16"
         TextColor="Blue"

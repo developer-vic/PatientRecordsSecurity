@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel; 
 
 namespace PatientRecordsSecurity.Controls
 {
     internal class AllModels
-    {
+    { 
     }
     public class Staff
     {
         public string StaffId { get; set; } = "";
         public string FirstName { get; set; } = "";
         public string LastName { get; set; } = "";
+        public string Phone { get; set; } = "";
         public string Email { get; set; } = "";
         public string Role { get; set; } = "";
         public string Designation { get; set; } = "";
@@ -57,6 +53,7 @@ namespace PatientRecordsSecurity.Controls
         public string EmailAddress { get; set; } = "";
         public string MedicalHistory { get; set; } = "";
         public string Password { get; set; } = "";
+        public string Company { get; set; } = "";
 
         public string FullName => $"{FirstName} {LastName}";
     }

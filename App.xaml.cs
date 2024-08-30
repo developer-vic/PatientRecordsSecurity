@@ -1,12 +1,12 @@
-﻿namespace PatientRecordsSecurity
+﻿
+namespace PatientRecordsSecurity
 {
     public partial class App : Application
     {
         public App()
         {
-            InitializeComponent();
-
-            MainPage = new MainPage();
+            InitializeComponent(); 
+            MainPage = new LandingPage();  
         }
     }
 }

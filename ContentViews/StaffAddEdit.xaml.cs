@@ -41,7 +41,7 @@ public partial class StaffAddEdit : ContentView
 
         public ICommand? MyCommand { get; protected set; }
         public ICommand? PickerCommand { get; protected set; }
-        public Staff Staff { get; }
+        public Staff Staff { get; set; }
         public bool FieldsAreEnable { get; }
         public string Title { get; set; }
 
