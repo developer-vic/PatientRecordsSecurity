@@ -8,7 +8,7 @@ namespace PatientRecordsSecurity.Controls
     public class Staff
     {
         public string StaffId { get; set; } = "";
-        public string FirstName { get; set; } = "";
+        public string FirstName { get; set; } = ""; 
         public string LastName { get; set; } = "";
         public string Phone { get; set; } = "";
         public string Email { get; set; } = "";
@@ -20,6 +20,9 @@ namespace PatientRecordsSecurity.Controls
         public string PermissionsSummary { get; set; } = "";
 
         public string FullName => $"{FirstName} {LastName}";
+        public bool IsAdmin => Role == "Admin";
+        public bool IsNotAdmin => Role != "Admin";
+        public bool IsPatient => Designation == "Patient";
     }
     public class Role
     {

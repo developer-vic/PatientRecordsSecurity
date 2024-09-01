@@ -26,8 +26,13 @@ public partial class UserAccessView : ContentView
         public ICommand EditStaffCommand => new Command<Staff>(OnEditStaff);
 
         public UserAccessViewVM()
-        { 
-            Staffs = VUtils.GetStaffs();
+        {
+            INitializeData();
+        }
+
+        private async void INitializeData()
+        {
+            Staffs = await VUtils.GetStaffs();
             _Staffs = Staffs;
         }
 

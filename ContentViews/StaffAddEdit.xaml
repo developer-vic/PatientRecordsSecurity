@@ -39,6 +39,9 @@
         <Label Text="Confirm Password" FontSize="14" Margin="0,20,0,0" />
         <Entry Text="{Binding ConfirmPassword}" Placeholder="Confirm Password" IsPassword="True" IsEnabled="{Binding FieldsAreEnable}"/>
 
+        <ActivityIndicator IsVisible="{Binding ShowLoading}" IsRunning="{Binding ShowLoading}"  
+                  Margin="20"  VerticalOptions="Center" HorizontalOptions="Center" Color="#2A4D69"/>
+        
         <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Margin="0,20,0,0" >
             <Button Grid.Column="0" Text="Save"  Command="{Binding MyCommand}" CommandParameter="Save" IsVisible="{Binding FieldsAreEnable}" />
             <Button Grid.Column="1" Text="Cancel" BackgroundColor="DarkRed"  Command="{Binding MyCommand}" CommandParameter="Cancel" />

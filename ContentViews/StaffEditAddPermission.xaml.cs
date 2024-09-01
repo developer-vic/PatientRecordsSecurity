@@ -19,6 +19,8 @@ public partial class StaffEditAddPermission : ContentView
         private string _statusMessage = "";
         private bool? _isStaffFound;
         private Role? _selectedRole;
+        private bool showLoading;
+        private ObservableCollection<Staff> staffList = new ObservableCollection<Staff>();
 
         public string? StaffId
         {
@@ -75,6 +77,9 @@ public partial class StaffEditAddPermission : ContentView
             }
         }
         public ObservableCollection<Permission> Permissions { get; } = new ObservableCollection<Permission>();
+
+
+        public bool ShowLoading { get => showLoading; set { SetProperty(ref showLoading, value); } } 
         public bool FieldsAreEnable { get; }
 
         public ICommand SaveCommand => new Command(OnSave);
@@ -83,43 +88,58 @@ public partial class StaffEditAddPermission : ContentView
 
         public StaffEditAddPermissionVM(string? __staffId, bool fieldsAreEnable)
         {
-            if (!string.IsNullOrEmpty(__staffId)) StaffId = __staffId; FieldsAreEnable = fieldsAreEnable;
+            InitializeData(__staffId); FieldsAreEnable = fieldsAreEnable;
             Title = !FieldsAreEnable ? "View User Access" : "Add User Access";
-            if ((__staffId == "" || __staffId != null) && FieldsAreEnable) Title = "Edit Permissions";   
+            if ((__staffId == "" || __staffId != null) && FieldsAreEnable) Title = "Edit Permissions";
+        }
+
+        private async void InitializeData(string? __staffId)
+        {
+            ShowLoading= true;
+            staffList = await VUtils.GetStaffs();
+            if (!string.IsNullOrEmpty(__staffId)) StaffId = __staffId; 
+            ShowLoading = false;
         }
 
         private void SearchStaff()
-        {
-            ObservableCollection<Staff> staffList = VUtils.GetStaffs();
-
-            SelectedStaff = staffList.FirstOrDefault(s => s.StaffId == StaffId);
-
+        { 
+            SelectedStaff = staffList.FirstOrDefault(s => s.StaffId == StaffId); 
             if (SelectedStaff != null)
             {
-                StatusMessage = "Found";
-                IsStaffFound = true;
+                StatusMessage = "Found"; IsStaffFound = true;
                 SelectedRole = Roles.FirstOrDefault(r => r.Name == SelectedStaff.Role);
             }
             else
             {
-                StatusMessage = "Not Found";
-                IsStaffFound = false;
-                SelectedRole = null;
+                StatusMessage = "Not Found"; IsStaffFound = false; SelectedRole = null;
             }
         }
 
-        private void OnSave()
+        private async void OnSave()
         {
             if (SelectedStaff != null && SelectedRole != null)
             {
                 SelectedStaff.Role = SelectedRole.Name;
+                try
+                {
+                    ShowLoading = true;
+                    await new FirebaseClass().SaveUpdateStaffAsync(SelectedStaff);
+                    VUtils.ShowMessage("Role Updated Successfully");
+                    ((MainPageVM)VUtils.GetMainPage().BindingContext).CurrentView = new UserAccessView();
+                }
+                catch (Exception)
+                {
+                    VUtils.ToastText("Error occurred\nCheck network and try again");
+                }
+                ShowLoading = false;
             }
+            else VUtils.ToastText("Please select role");
         }
 
         private void OnCancel()
         {
             if (Title == "Add User Access" || string.IsNullOrEmpty(StaffId))
-                VUtils.GetMainPage().BindingContext = new MainPageVM();
+                ((MainPageVM)VUtils.GetMainPage().BindingContext).CurrentView = new DefaultView();
             else
                 ((MainPageVM)VUtils.GetMainPage().BindingContext).CurrentView = new UserAccessView();
         }

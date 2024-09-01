@@ -7,18 +7,28 @@
 
         <Label Text="Search by Patient ID or Name" FontSize="14"/>
         <SearchBar Placeholder="Patient ID or Name" Text="{Binding SearchQuery}" />
+        
+        <ActivityIndicator IsVisible="{Binding ShowLoading}" IsRunning="{Binding ShowLoading}"  
+                           Margin="20"  VerticalOptions="Center" HorizontalOptions="Center" Color="#2A4D69"/>
 
         <CollectionView ItemsSource="{Binding Patients}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,Auto,Auto" ColumnSpacing="20">
+                    <Grid Padding="10" ColumnDefinitions="*,*,*,*,*,Auto,Auto,Auto" ColumnSpacing="20">
                         <Label Text="{Binding PatientID}" Grid.Column="0" VerticalOptions="Center"/>
                         <Label Text="{Binding FullName}" Grid.Column="1" VerticalOptions="Center" />
                         <Label Text="{Binding DateOfBirth, StringFormat='{0:dd MMM yyyy}'}" Grid.Column="2" VerticalOptions="Center" />
                         <Label Text="{Binding Gender}" Grid.Column="3" VerticalOptions="Center" />
                         <Label Text="{Binding ContactNumber}" Grid.Column="4" VerticalOptions="Center" />
-                        <Button Text="View" Command="{Binding BindingContext.ViewPatientCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" CommandParameter="{Binding .}" Grid.Column="5" VerticalOptions="Center" />
-                        <Button Text="Edit" Command="{Binding BindingContext.EditPatientCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" CommandParameter="{Binding .}" Grid.Column="6" VerticalOptions="Center" />
+                        <Button Text="View" 
+                                Command="{Binding BindingContext.ViewPatientCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" 
+                                CommandParameter="{Binding .}" Grid.Column="5" VerticalOptions="Center"/>
+                        <Button Text="Edit" IsVisible="{Binding BindingContext.ShowPatientAddMenu, Source={RelativeSource AncestorType={x:Type ContentView}}}" 
+                                Command="{Binding BindingContext.EditPatientCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" 
+                                CommandParameter="{Binding .}" Grid.Column="6" VerticalOptions="Center" />
+                        <Button Text="Delete" IsVisible="{Binding BindingContext.ShowPatientDeleteMenu, Source={RelativeSource AncestorType={x:Type ContentView}}}"
+                                Command="{Binding BindingContext.DeletePatientCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" 
+                                CommandParameter="{Binding .}" Grid.Column="7" VerticalOptions="Center" BackgroundColor="DarkRed" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

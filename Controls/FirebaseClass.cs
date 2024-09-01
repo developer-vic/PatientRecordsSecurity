@@ -62,7 +62,7 @@ namespace PatientRecordsSecurity.Controls
             await _firebaseClient
                 .Child(MATRIC_NO)
                 .Child("staffs")
-                .Child(staff.StaffId)
+                .Child(staff.Username)
                 .PutAsync(staff);
         }
         public async Task<List<Staff>> GetAllStaffsAsync()
@@ -81,15 +81,22 @@ namespace PatientRecordsSecurity.Controls
                 return [];
             }
         }
-        public async Task<Staff> GetStaffAsync(string staffID)
+        public async Task<Staff?> GetStaffAsync(string staffID)
         {
-            var patient = await _firebaseClient
-                .Child(MATRIC_NO)
-                .Child("staffs")
-                .Child(staffID)
-                .OnceSingleAsync<Staff>();
+            try
+            {
+                var patient = await _firebaseClient
+                    .Child(MATRIC_NO)
+                    .Child("staffs")
+                    .Child(staffID)
+                    .OnceSingleAsync<Staff>();
 
-            return patient;
+                return patient;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
         public async Task DeleteStaffAsync(string staffID)
         {
@@ -104,7 +111,7 @@ namespace PatientRecordsSecurity.Controls
         {
             try
             {
-                Staff staffAcc = await GetStaffAsync(username);
+                Staff? staffAcc = await GetStaffAsync(username);
                 if (staffAcc != null && staffAcc.Password == password)
                 {
                     VUtils.LoggedInUser = staffAcc; return true;
@@ -124,7 +131,7 @@ namespace PatientRecordsSecurity.Controls
                             LastName = patientAcc.LastName,
                             Username = username,
                             Phone = patientAcc.ContactNumber,
-                            Role = "Patient",
+                            Role = "Others",
                             StaffId = patientAcc.PatientID,
                             PermissionsSummary = patientAcc.MedicalHistory
                         };

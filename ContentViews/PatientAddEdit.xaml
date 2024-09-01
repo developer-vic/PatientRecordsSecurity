@@ -6,7 +6,7 @@
         <Label Text="{Binding Title}"  FontSize="20" FontAttributes="Bold" TextColor="#2A4D69" HorizontalOptions="Center" />
 
         <Label Text="Patient ID" FontSize="14" Margin="0,20,0,0" />
-        <Entry Placeholder="Patient ID" Text="{Binding Patient.PatientID}" IsReadOnly="True" />
+        <Entry Placeholder="Patient ID" Text="{Binding PatientID}" IsReadOnly="True" />
 
         <Label Text="First Name" FontSize="14" Margin="0,20,0,0" />
         <Entry Placeholder="First Name" Text="{Binding Patient.FirstName}" IsEnabled="{Binding FieldsAreEnable}"/>
@@ -29,14 +29,17 @@
         <Entry Placeholder="Email Address" Text="{Binding Patient.EmailAddress}" Keyboard="Email" IsEnabled="{Binding FieldsAreEnable}" />
 
         <Label Text="Medical History" FontSize="14" Margin="0,20,0,0" />
-        <Editor Placeholder="Patient Medical History..." Text="{Binding Patient.MedicalHistory}" HeightRequest="100" IsEnabled="{Binding FieldsAreEnable}" />
+        <Editor Placeholder="Patient Medical History..." Text="{Binding Patient.MedicalHistory}" HeightRequest="100" />
 
         <Label Text="Password" FontSize="14" Margin="0,20,0,0" />
         <Entry Placeholder="Password" Text="{Binding Patient.Password}" IsPassword="True" IsEnabled="{Binding FieldsAreEnable}" />
 
-        <Label Text="Confirm Password" FontSize="14" Margin="0,20,0,0" />
-        <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True" IsEnabled="{Binding FieldsAreEnable}" />
+        <Label Text="Confirm Password" FontSize="14" Margin="0,20,0,0" IsVisible="{Binding FieldsAreEnable}" />
+        <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True" IsVisible="{Binding FieldsAreEnable}" />
 
+        <ActivityIndicator IsVisible="{Binding ShowLoading}" IsRunning="{Binding ShowLoading}"  
+                    Margin="20"  VerticalOptions="Center" HorizontalOptions="Center" Color="#2A4D69"/>
+        
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="20" Margin="0,20,0,0" >
             <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand" IsVisible="{Binding FieldsAreEnable}" />
             <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand" BackgroundColor="DarkRed"/>

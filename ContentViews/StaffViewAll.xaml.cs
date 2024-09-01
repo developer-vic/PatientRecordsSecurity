@@ -24,11 +24,17 @@ public partial class StaffViewAll : ContentView
 
         public ICommand AddNewStaffCommand => new Command(OnAddNewStaff);
         public ICommand ViewStaffCommand => new Command<Staff>(OnViewStaff);
-        public ICommand EditStaffCommand => new Command<Staff>(OnEditStaff);
+        public ICommand EditStaffCommand => new Command<Staff>(OnEditStaff); 
 
         public StaffViewAllVM()
-        {  
-            StaffList = VUtils.GetStaffs();  
+        {
+            InitializeData();
+        }
+
+        private async void InitializeData()
+        {
+            StaffList = await VUtils.GetStaffs();
+            _staffList = StaffList;
         }
 
         private void FilterStaffList()
@@ -60,7 +66,7 @@ public partial class StaffViewAll : ContentView
         private void OnEditStaff(Staff staff)
         {
             ((MainPageVM)VUtils.GetMainPage().BindingContext).CurrentView = new StaffAddEdit(staff);
-        } 
+        }
 
     }
 }

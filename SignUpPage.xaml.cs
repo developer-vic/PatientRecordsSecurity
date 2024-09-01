@@ -25,10 +25,11 @@ public partial class SignUpPage : ContentPage
         {
             Staff.StaffId = Staff.Username; 
             Staff.FirstName = Staff.Company; Staff.LastName = ".";
-            Staff.Role = "Doctor"; Staff.Designation = "Admin"; 
-            string errMsg = VUtils.StaffFieldsAreValid(Staff);
+            Staff.Role = "Doctor"; Staff.Designation = "Admin";
+            ShowLoading(true);
+            string errMsg = await VUtils.StaffFieldsAreValid(Staff, true);
             if (string.IsNullOrEmpty(errMsg))
-            {  
+            {
                 await firebaseClass.SaveUpdateStaffAsync(Staff);
                 VUtils.ShowMessage("Registration Successful");
                 VUtils.LoggedInUser = Staff;
@@ -36,9 +37,16 @@ public partial class SignUpPage : ContentPage
             }
             else VUtils.ShowMessage(errMsg);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            VUtils.ToastText("Registration Failed\nPlease try again.");
+            VUtils.ToastText("Registration Failed\nPlease check network and try again.");
         }
+        ShowLoading(false);
+    }
+
+    private void ShowLoading(bool isRunning)
+    {
+        showLoading.IsVisible = isRunning;
+        showLoading.IsRunning = isRunning;
     }
 }

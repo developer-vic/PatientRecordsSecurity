@@ -11,8 +11,8 @@
             <Grid Padding="5,20" BackgroundColor="#34495e" RowDefinitions="auto" ColumnDefinitions="auto,*">
                 <Image Grid.RowSpan="1" Grid.Column="0" Source="doctor.png" WidthRequest="80" HeightRequest="50" Aspect="AspectFill"/>
                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                    <Label Text="User Name" TextColor="White" FontSize="18"/>
-                    <Label Grid.Column="1" Text="user@example.com" TextColor="White" FontSize="14"/>
+                    <Label Text="{Binding User.FullName}" TextColor="White" FontSize="18" LineBreakMode="TailTruncation"/>
+                    <Label Grid.Column="1" Text="{Binding User.Email}" TextColor="White" FontSize="14" LineBreakMode="TailTruncation"/>
                 </VerticalStackLayout>
             </Grid>
 
@@ -20,7 +20,7 @@
             <ScrollView VerticalOptions="FillAndExpand">
                 <VerticalStackLayout>
 
-                    <Grid BackgroundColor="#2c3e50" Padding="20,0">
+                    <Grid BackgroundColor="#2c3e50" Padding="20,0" IsVisible="{Binding ShowStaffMenu}">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="ManageStaffDrop" />
                         </Grid.GestureRecognizers>
@@ -34,8 +34,8 @@
                     </StackLayout>
                     <BoxView HeightRequest="5" Color="#34495e" />
 
-                    
-                    <Grid BackgroundColor="#2c3e50" Padding="20,0">
+
+                    <Grid BackgroundColor="#2c3e50" Padding="20,0" IsVisible="{Binding ShowStaffMenu}">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="ManageAccessDrop" />
                         </Grid.GestureRecognizers>
@@ -57,8 +57,9 @@
                         <Image Source="{Binding ManagePatientDrop}" WidthRequest="20" HorizontalOptions="End" Margin="10,20"/>
                     </Grid>
                     <StackLayout IsVisible="{Binding ManagePatientMenuVisible}"  BackgroundColor="#34495e">
-                        <Button Text="Add New Patient" BackgroundColor="#34495e" TextColor="White" Command="{Binding MyCommand}" CommandParameter="PatientAdd"/>
-                        <Button Text="View Patient Records" BackgroundColor="#34495e" TextColor="White" Command="{Binding MyCommand}" CommandParameter="PatientView"/>
+                        <Button Text="Add New Patient" BackgroundColor="#34495e" TextColor="White" Command="{Binding MyCommand}" CommandParameter="PatientAdd" IsVisible="{Binding ShowPatientAddMenu}"/>
+                        <Button Text="View Patient Records" BackgroundColor="#34495e" TextColor="White" Command="{Binding MyCommand}" CommandParameter="PatientView" IsVisible="{Binding ShowPatientViewMenu}"/>
+                        <Button Text="View My Record" BackgroundColor="#34495e" TextColor="White" Command="{Binding MyCommand}" CommandParameter="PatientRecord" IsVisible="{Binding ShowPatientMyRecord}"/> 
                     </StackLayout>
                     <BoxView HeightRequest="5" Color="#34495e" />
                     
@@ -79,9 +80,9 @@
                             <Image Source="{Binding PasswordDrop}" WidthRequest="20" HorizontalOptions="End" Margin="10,20"/>
                         </Grid>
                         <StackLayout IsVisible="{Binding PasswordMenuVisible}" >
-                            <Button Text="Admin" BackgroundColor="#2c3e50" TextColor="White" Command="{Binding MyCommand}" CommandParameter="ChangePassword"/>
+                            <Button Text="Admin" BackgroundColor="#2c3e50" TextColor="White" Command="{Binding MyCommand}" CommandParameter="ChangePassword" IsVisible="{Binding User.IsAdmin}"/>
                             <BoxView HeightRequest="5" Color="#34495e" />
-                            <Button Text="User" BackgroundColor="#2c3e50" TextColor="White" Command="{Binding MyCommand}" CommandParameter="ChangePassword"/>
+                            <Button Text="User" BackgroundColor="#2c3e50" TextColor="White" Command="{Binding MyCommand}" CommandParameter="ChangePassword" IsVisible="{Binding User.IsNotAdmin}"/>
                         </StackLayout>
                     </StackLayout>
 

@@ -31,7 +31,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding IsGranted}" />
+                            <CheckBox IsChecked="{Binding IsGranted}" IsEnabled="False" />
                             <Label Text="{Binding Name}" VerticalOptions="Center" />
                         </StackLayout>
                     </DataTemplate>
@@ -39,6 +39,9 @@
             </CollectionView>
         </StackLayout>
 
+        <ActivityIndicator IsVisible="{Binding ShowLoading}" IsRunning="{Binding ShowLoading}"  
+           Margin="20"  VerticalOptions="Center" HorizontalOptions="Center" Color="#2A4D69"/>
+        
         <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
             <Button Text="Save" Command="{Binding SaveCommand}" IsEnabled="{Binding IsStaffFound}" IsVisible="{Binding FieldsAreEnable}" />
             <Button Text="Cancel" Command="{Binding CancelCommand}" Margin="10,0,0,0" />

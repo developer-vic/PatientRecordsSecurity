@@ -4,6 +4,21 @@
              x:Class="PatientRecordsSecurity.ContentViews.DefaultView">
 
     <VerticalStackLayout Spacing="15" VerticalOptions="Center">
+
+        <Label FontSize="18" HorizontalTextAlignment="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="You logged in as " TextColor="Maroon" />
+                    <Span Text="{Binding User.Designation}" TextColor="#2A4D69" FontSize="18" FontAttributes="Bold" />
+                    <Span Text=" at " />
+                    <Span Text="{Binding User.Company}" TextTransform="Uppercase" FontAttributes="Bold" TextColor="Maroon" />
+                    <Span Text=" " />
+                    <Span Text="{Binding User.Role}" TextColor="#2A4D69" FontSize="18" FontAttributes="Bold" />
+                    <Span Text=" to:" TextColor="Maroon" /> 
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
         <Label 
                Text="Design and Implementation of Data Security for Patient Records"
                FontSize="20"

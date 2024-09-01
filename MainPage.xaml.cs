@@ -1,5 +1,6 @@
 ﻿using PatientRecordsSecurity.ContentViews;
 using PatientRecordsSecurity.Controls;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace PatientRecordsSecurity
@@ -12,8 +13,10 @@ namespace PatientRecordsSecurity
             BindingContext = new MainPageVM();
         }
     }
+
     public class MainPageVM : BaseViewModel
     {
+        private Patient _patient = new Patient();
         private string manageStaffDrop = "dropdown.png";
         private bool manageStaffMenuVisible;
         private string manageAccessDrop = "dropdown.png";
@@ -40,8 +43,35 @@ namespace PatientRecordsSecurity
         public ContentView CurrentView { get => currentView; set { SetProperty(ref currentView, value); } }
 
         public ICommand? MyCommand { get; private set; }
+        public Staff? User { get; set; }
+        public bool ShowStaffMenu { get; set; }
+        public bool ShowPatientAddMenu { get; set; }
+        public bool ShowPatientViewMenu { get; set; }
+        public bool ShowPatientMyRecord { get; set; }
+
 
         public MainPageVM()
+        {
+            RunCommands();
+            InitializeData();
+        }
+
+        private async void InitializeData()
+        {
+            User = VUtils.LoggedInUser ?? new Staff();
+            ObservableCollection<Role> Roles = VUtils.GetRoles();
+            Role role = Roles.Where(p => p.Name == User.Role).First();
+            ObservableCollection<Permission> permissions = role.Permissions;
+            ShowStaffMenu = permissions.Where(p => p.Name == "Manage Staff").First().IsGranted;
+            ShowPatientAddMenu = permissions.Where(p => p.Name == "Edit Patient Record").First().IsGranted;
+            if (User.IsPatient)
+            {
+                ShowPatientMyRecord = true; _patient = await new FirebaseClass().GetPatientAsync(User.Username);
+            }
+            else ShowPatientViewMenu = permissions.Where(p => p.Name == "View Patient Record").First().IsGranted;
+        }
+
+        private void RunCommands()
         {
             MyCommand = new Command<string>((string par) =>
             {
@@ -89,16 +119,18 @@ namespace PatientRecordsSecurity
                     case "PatientView":
                         CurrentView = new PatientView();
                         break;
+                    case "PatientRecord":
+                        CurrentView = new PatientAddEdit(_patient, false);
+                        break;
                     case "ChangePassword":
                         CurrentView = new ChangePassword();
                         break;
                     case "Logout":
-                        VUtils.LogOut(); 
+                        VUtils.LogOut();
                         break;
                 }
             });
         }
-
     }
 
 }
