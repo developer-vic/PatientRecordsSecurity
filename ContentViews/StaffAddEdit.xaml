@@ -25,7 +25,7 @@
         </StackLayout>
 
         <Label Text="Designation" FontSize="14" Margin="0,20,0,0" />
-        <StackLayout Orientation="Horizontal" Padding="0,0,0,0" IsEnabled="{Binding FieldsAreEnable}">
+        <StackLayout Orientation="Horizontal" Padding="0,0,0,0" IsEnabled="{Binding _IS_NEW}">
             <Picker x:Name="pickerDesignations" ItemsSource="{Binding Designations}" SelectedItem="{Binding SelectedDesignation}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
             <!--<ImageButton Source="dropdown.png" Command="{Binding PickerCommand}" CommandParameter="{x:Reference pickerDesignations}" VerticalOptions="Center" BackgroundColor="Transparent" WidthRequest="30"/>-->
         </StackLayout>

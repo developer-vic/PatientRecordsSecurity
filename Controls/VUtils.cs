@@ -47,7 +47,7 @@ namespace PatientRecordsSecurity.Controls
         }
 
         internal static Page GetMainPage()
-        { 
+        {
             if (App.Current?.MainPage != null)
                 return App.Current.MainPage;
             return new Page();
@@ -61,7 +61,7 @@ namespace PatientRecordsSecurity.Controls
                 else if (Application.Current.MainPage != null)
                     Application.Current.MainPage.Navigation.PushAsync(contentPage);
             }
-        } 
+        }
         internal async static void LogOut()
         {
             if (Application.Current?.MainPage != null)
@@ -118,8 +118,10 @@ namespace PatientRecordsSecurity.Controls
                 var tempStaffList = await new FirebaseClass().GetAllStaffsAsync();
                 if (tempStaffList != null)
                 {
+                    tempStaffList = tempStaffList.Where(P => P.Company == LoggedInUser.Company).ToList();
                     tempStaffList.Remove(tempStaffList.Where(p => p.Designation == "Admin").First());
-                    tempStaffList.Remove(tempStaffList.Where(p => p.StaffId == LoggedInUser?.StaffId).First());
+                    if (tempStaffList.Where(p => p.StaffId == LoggedInUser?.StaffId).FirstOrDefault() != null)
+                        tempStaffList.Remove(tempStaffList.Where(p => p.StaffId == LoggedInUser?.StaffId).First());
                 }
                 StaffList = new ObservableCollection<Staff>(tempStaffList ?? []);
             }
@@ -133,13 +135,13 @@ namespace PatientRecordsSecurity.Controls
             ObservableCollection<Patient> PatientList = new ObservableCollection<Patient>();
             try
             {
-                var tempPatientList = await new FirebaseClass().GetAllPatientsAsync(); 
+                var tempPatientList = await new FirebaseClass().GetAllPatientsAsync();
                 PatientList = new ObservableCollection<Patient>(tempPatientList ?? []);
             }
             catch (Exception) { }
             return PatientList;
         }
-         
+
         internal static async Task<string> StaffFieldsAreValid(Staff staff, bool _IS_NEW)
         {
             if (string.IsNullOrEmpty(staff.FirstName) || string.IsNullOrEmpty(staff.LastName) || string.IsNullOrEmpty(staff.Email)
@@ -171,6 +173,6 @@ namespace PatientRecordsSecurity.Controls
             }
             else return "";
         }
-    } 
+    }
 
 }

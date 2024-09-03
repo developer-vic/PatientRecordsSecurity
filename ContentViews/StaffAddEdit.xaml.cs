@@ -6,15 +6,14 @@ namespace PatientRecordsSecurity.ContentViews;
 
 public partial class StaffAddEdit : ContentView
 {
-	public StaffAddEdit(Controls.Staff? staff = null, bool fieldsAreEnable = true)
-	{
-		InitializeComponent();
-		BindingContext = new StaffAddEditVM(staff, fieldsAreEnable); 
+    public StaffAddEdit(Controls.Staff? staff = null, bool fieldsAreEnable = true)
+    {
+        InitializeComponent();
+        BindingContext = new StaffAddEditVM(staff, fieldsAreEnable);
     }
 
     private class StaffAddEditVM : BaseViewModel
     {
-        private bool _IS_NEW = true;
         private string? selectedDesignation;
         private string? username;
         private bool showLoading;
@@ -38,14 +37,13 @@ public partial class StaffAddEdit : ContentView
             if (!string.IsNullOrEmpty(SelectedDesignation))
             {
                 string designationCode = SelectedDesignation.Substring(0, 3).ToUpper();
-                int totalDesn = _staffList.Where(p=>p.Designation==SelectedDesignation).Count();
-                totalDesn++; 
+                int totalDesn = _staffList.Where(p => p.Designation == SelectedDesignation).Count(); 
                 if (_staffList.Count > 0)
                 {
-                    string lastID = _staffList.Last().StaffId;
-                    totalDesn = int.Parse(lastID.Replace(designationCode, ""));
-                    totalDesn++;
-                } 
+                    string lastID = _staffList.Last().Username; 
+                    int.TryParse(lastID.Replace(designationCode, ""), out totalDesn);
+                }
+                totalDesn++;
                 Username = $"{designationCode}{totalDesn.ToString("D3")}";
             }
         }
@@ -57,6 +55,7 @@ public partial class StaffAddEdit : ContentView
         public bool FieldsAreEnable { get; }
         public string Title { get; set; }
         public bool ShowLoading { get => showLoading; set { SetProperty(ref showLoading, value); } }
+        public bool _IS_NEW { get; set; } = true;
 
         public StaffAddEditVM(Staff? staff, bool fieldsAreEnable)
         {
@@ -109,7 +108,7 @@ public partial class StaffAddEdit : ContentView
             try
             {
                 Staff.Username = Username ?? ""; Staff.Phone = Staff.Email;
-                Staff.Company = VUtils.LoggedInUser?.Company ?? "";  
+                Staff.Company = VUtils.LoggedInUser?.Company ?? "";
                 Staff.Designation = SelectedDesignation ?? "";
                 ShowLoading = true;
                 string errMsg = await VUtils.StaffFieldsAreValid(Staff, _IS_NEW);
@@ -120,12 +119,12 @@ public partial class StaffAddEdit : ContentView
                     else
                     {
                         await new FirebaseClass().SaveUpdateStaffAsync(Staff);
-                        if(_IS_NEW) VUtils.ShowMessage("Staff has been added successful");
+                        if (_IS_NEW) VUtils.ShowMessage("Staff has been added successful");
                         else VUtils.ShowMessage("Staff has been updated successful");
                         ((MainPageVM)VUtils.GetMainPage().BindingContext).CurrentView = new StaffViewAll();
                     }
                 }
-                else VUtils.ShowMessage(errMsg); 
+                else VUtils.ShowMessage(errMsg);
             }
             catch (Exception)
             {
