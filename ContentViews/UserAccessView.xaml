@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PatientRecordsSecurity.ContentViews.UserAccessView"
+             x:Name="UserAccessViewPage">
+    <StackLayout Padding="20" Spacing="15">
+        <Label Text="View User Access"  FontSize="20" FontAttributes="Bold" TextColor="#2A4D69" HorizontalOptions="Center" />
+
+        <Label Text="Search by Name or Staff ID"  FontSize="16" />
+        <SearchBar Placeholder="Name or Staff ID" Text="{Binding SearchQuery}" />
+
+        <CollectionView ItemsSource="{Binding Staffs}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnDefinitions="*,*,*,*,Auto,Auto" ColumnSpacing="10">
+                        <Label Text="{Binding StaffId}" Grid.Column="0" VerticalOptions="Center" />
+                        <Label Text="{Binding FullName}" Grid.Column="1" VerticalOptions="Center" />
+                        <Label Text="{Binding Role}" Grid.Column="2" VerticalOptions="Center" />
+                        <Label Text="{Binding PermissionsSummary}" Grid.Column="3" VerticalOptions="Center" />
+                        <Button Text="View" Command="{Binding BindingContext.ViewStaffCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" CommandParameter="{Binding .}" Grid.Column="4" />
+                        <Button Text="Edit" Command="{Binding BindingContext.EditStaffCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" CommandParameter="{Binding .}" Grid.Column="5" BackgroundColor="#34495e"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView> 
+    </StackLayout>
+</ContentView>

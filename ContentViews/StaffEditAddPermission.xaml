@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:PatientRecordsSecurity.Controls"
+             x:Class="PatientRecordsSecurity.ContentViews.StaffEditAddPermission">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToColorConverter x:Key="BooleanToColorConverter" TrueColor="Green" FalseColor="Red" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <StackLayout Padding="20" Spacing="15">
+        <Label Text="{Binding Title}" FontSize="20" FontAttributes="Bold" TextColor="#2A4D69" HorizontalOptions="Center" />
+
+        <Label Text="Enter Staff ID"  />
+        <SearchBar Placeholder="Staff 001" Text="{Binding StaffId}" IsEnabled="{Binding FieldsAreEnable}" />
+
+        <Label Text="{Binding StatusMessage}" HorizontalOptions="Center"  
+               TextColor="{Binding IsStaffFound, Converter={StaticResource BooleanToColorConverter}}" />
+
+
+        <StackLayout Orientation="Horizontal" IsEnabled="{Binding FieldsAreEnable}">
+            <Picker Title="Role Name" ItemsSource="{Binding Roles}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedRole}" IsEnabled="{Binding IsStaffFound}" HorizontalOptions="FillAndExpand"/>
+            <!--<ImageButton Source="dropdown.png" Command="{Binding PickerCommand}" CommandParameter="{x:Reference pickerRoles}" VerticalOptions="Center" BackgroundColor="Transparent" WidthRequest="30"/>-->
+        </StackLayout>
+
+        <StackLayout IsEnabled="{Binding FieldsAreEnable}">
+            <Label Text="Permissions:" FontAttributes="Bold" /> 
+            <CollectionView ItemsSource="{Binding Permissions}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding IsGranted}" IsEnabled="False" />
+                            <Label Text="{Binding Name}" VerticalOptions="Center" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+        <ActivityIndicator IsVisible="{Binding ShowLoading}" IsRunning="{Binding ShowLoading}"  
+           Margin="20"  VerticalOptions="Center" HorizontalOptions="Center" Color="#2A4D69"/>
+        
+        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+            <Button Text="Save" Command="{Binding SaveCommand}" IsEnabled="{Binding IsStaffFound}" IsVisible="{Binding FieldsAreEnable}" />
+            <Button Text="Cancel" Command="{Binding CancelCommand}" Margin="10,0,0,0" />
+        </StackLayout>
+    </StackLayout>
+</ContentView>

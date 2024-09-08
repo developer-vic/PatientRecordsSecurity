@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PatientRecordsSecurity.ContentViews.DefaultView">
+
+    <VerticalStackLayout Spacing="15" VerticalOptions="Center">
+
+        <Label FontSize="18" HorizontalTextAlignment="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="You logged in as " TextColor="Maroon" />
+                    <Span Text="{Binding User.Designation}" TextColor="#2A4D69" FontSize="18" FontAttributes="Bold" />
+                    <Span Text=" at " />
+                    <Span Text="{Binding User.Company}" TextTransform="Uppercase" FontAttributes="Bold" TextColor="Maroon" />
+                    <Span Text=" " />
+                    <Span Text="{Binding User.Role}" TextColor="#2A4D69" FontSize="18" FontAttributes="Bold" />
+                    <Span Text=" to:" TextColor="Maroon" /> 
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Label 
+               Text="Design and Implementation of Data Security for Patient Records"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="#2A4D69"
+               HorizontalTextAlignment="Center" />
+
+        <Image  
+               Source="security_icon.png"
+               Aspect="AspectFit"
+               WidthRequest="100"
+               HeightRequest="100" />
+
+        <Label  
+               Text="Full Name: Adewale Damilola Opeyemi"
+               FontSize="16" 
+               HorizontalOptions="Center"/>
+
+        <Label  
+               Text="Matric No: CS/HND/F22/3336"
+               FontSize="16"
+               FontAttributes="Bold" 
+               HorizontalOptions="Center"/>
+
+        <Label 
+               Text="Supervisor Name: Mr. Jimoh H.O"
+               FontSize="16"
+               FontAttributes="Italic"
+               HorizontalOptions="Center"/>
+
+        <Grid HorizontalOptions="FillAndExpand">
+            <Image  
+  Source="university_logo.png"
+  Aspect="AspectFit"
+  WidthRequest="120"
+  HeightRequest="50"
+  HorizontalOptions="Start"/>
+
+            <Label  
+  Text="Submission Date: August 2024"
+  FontSize="16"
+  TextColor="Maroon"
+                    VerticalOptions="Center"
+  HorizontalOptions="EndAndExpand"/>
+        </Grid>
+
+    </VerticalStackLayout>
+
+</ContentView>
