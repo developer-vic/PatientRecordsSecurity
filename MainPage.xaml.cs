@@ -125,6 +125,9 @@ namespace PatientRecordsSecurity
                     case "ChangePassword":
                         CurrentView = new ChangePassword();
                         break;
+                    case "DefaultView":
+                        CurrentView = new DefaultView();
+                        break;
                     case "Logout":
                         VUtils.LogOut();
                         break;

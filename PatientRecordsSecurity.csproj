@@ -1,9 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<TargetFrameworks>net8.0-windows10.0.19041.0</TargetFrameworks>
+
+		<!-- 
 		<TargetFrameworks>net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net8.0-windows10.0.19041.0</TargetFrameworks>  
 		
-		<!--<TargetFrameworks>net8.0-windows10.0.19041.0</TargetFrameworks>  
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>-->
 		
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
@@ -94,14 +97,19 @@
 	  <None Remove="Resources\Images\doctor.png" />
 	  <None Remove="Resources\Images\dropdown.png" />
 	  <None Remove="Resources\Images\dropup.png" />
+	  <None Remove="Resources\Images\edit_permission.png" />
+	  <None Remove="Resources\Images\patients_view.png" />
+	  <None Remove="Resources\Images\patient_add.png" />
 	  <None Remove="Resources\Images\security_icon.png" />
+	  <None Remove="Resources\Images\staffs_view.png" />
+	  <None Remove="Resources\Images\staff_add.png" />
 	  <None Remove="Resources\Images\university_logo.png" />
+	  <None Remove="Resources\Images\user_access.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="FirebaseDatabase.net" Version="4.2.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

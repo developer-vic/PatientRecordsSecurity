@@ -9,6 +9,9 @@
         <VerticalStackLayout Grid.Row="0" Grid.Column="0" WidthRequest="250" BackgroundColor="#2c3e50">
             <!-- User Information Panel -->
             <Grid Padding="5,20" BackgroundColor="#34495e" RowDefinitions="auto" ColumnDefinitions="auto,*">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding MyCommand}" CommandParameter="DefaultView"/>
+                </Grid.GestureRecognizers>
                 <Image Grid.RowSpan="1" Grid.Column="0" Source="doctor.png" WidthRequest="80" HeightRequest="50" Aspect="AspectFill"/>
                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
                     <Label Text="{Binding User.FullName}" TextColor="White" FontSize="18" LineBreakMode="TailTruncation"/>

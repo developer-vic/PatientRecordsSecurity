@@ -38,7 +38,7 @@
         FontAttributes="Italic"
         HorizontalOptions="Center"/>
 
-            <Grid HorizontalOptions="FillAndExpand" Padding="10">
+            <Grid HorizontalOptions="FillAndExpand" Padding="50,10">
                 <Image  
         Source="university_logo.png"
         Aspect="AspectFit"
@@ -54,7 +54,7 @@
         HorizontalOptions="EndAndExpand"/>
             </Grid>
 
-            <Grid HorizontalOptions="CenterAndExpand" ColumnDefinitions="auto,auto" ColumnSpacing="40">
+            <!--<Grid HorizontalOptions="CenterAndExpand" ColumnDefinitions="auto,auto" ColumnSpacing="40">
                 <Button  
                  Grid.Column="0"
          Text="Sign Up"
@@ -76,7 +76,17 @@
          HeightRequest="40" 
                 HorizontalOptions="EndAndExpand"
             Clicked="Button_Clicked_1"/>
-            </Grid>
+            </Grid>-->
+
+            <Button   
+Text="SIGN IN TO DASHBOARD"
+BackgroundColor="#34495E"
+TextColor="White"
+FontAttributes="Bold" 
+HeightRequest="40" 
+       HorizontalOptions="CenterAndExpand"
+   Clicked="Button_Clicked_1"/>
+
         </VerticalStackLayout>
     </ScrollView>
 

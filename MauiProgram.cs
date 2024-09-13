@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using PatientRecordsSecurity.Platforms.MacCatalyst;
-
-namespace PatientRecordsSecurity
+﻿namespace PatientRecordsSecurity
 {
     public static class MauiProgram
     {
@@ -15,8 +12,10 @@ namespace PatientRecordsSecurity
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-            // Apply the Mac Catalyst customization
-            EntryCustomization.Customize();
+
+#if MACCATALYST
+            PatientRecordsSecurity.Platforms.MacCatalyst.EntryCustomization.Customize();
+#endif
 
 #if DEBUG
             //builder.Logging.AddDebug();

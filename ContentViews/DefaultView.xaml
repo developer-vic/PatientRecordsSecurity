@@ -3,68 +3,114 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PatientRecordsSecurity.ContentViews.DefaultView">
 
-    <VerticalStackLayout Spacing="15" VerticalOptions="Center">
-
-        <Label FontSize="18" HorizontalTextAlignment="Center">
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span Text="You logged in as " TextColor="Maroon" />
-                    <Span Text="{Binding User.Designation}" TextColor="#2A4D69" FontSize="18" FontAttributes="Bold" />
-                    <Span Text=" at " />
-                    <Span Text="{Binding User.Company}" TextTransform="Uppercase" FontAttributes="Bold" TextColor="Maroon" />
-                    <Span Text=" " />
-                    <Span Text="{Binding User.Role}" TextColor="#2A4D69" FontSize="18" FontAttributes="Bold" />
-                    <Span Text=" to:" TextColor="Maroon" /> 
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-
+    <VerticalStackLayout Spacing="15" Padding="15">
         <Label 
                Text="Design and Implementation of Data Security for Patient Records"
                FontSize="20"
                FontAttributes="Bold"
                TextColor="#2A4D69"
                HorizontalTextAlignment="Center" />
-
-        <Image  
-               Source="security_icon.png"
-               Aspect="AspectFit"
-               WidthRequest="100"
-               HeightRequest="100" />
-
-        <Label  
-               Text="Full Name: Adewale Damilola Opeyemi"
-               FontSize="16" 
-               HorizontalOptions="Center"/>
-
-        <Label  
-               Text="Matric No: CS/HND/F22/3336"
+        <Grid ColumnDefinitions="auto,auto" HorizontalOptions="Center" ColumnSpacing="20">
+            <Label  Grid.Column="0"
+               Text="By: CS/HND/F22/3336"
                FontSize="16"
                FontAttributes="Bold" 
                HorizontalOptions="Center"/>
-
-        <Label 
+            <Label   Grid.Column="1"
                Text="Supervisor Name: Mr. Jimoh H.O"
                FontSize="16"
                FontAttributes="Italic"
                HorizontalOptions="Center"/>
-
-        <Grid HorizontalOptions="FillAndExpand">
-            <Image  
-  Source="university_logo.png"
-  Aspect="AspectFit"
-  WidthRequest="120"
-  HeightRequest="50"
-  HorizontalOptions="Start"/>
-
-            <Label  
-  Text="Submission Date: August 2024"
-  FontSize="16"
-  TextColor="Maroon"
-                    VerticalOptions="Center"
-  HorizontalOptions="EndAndExpand"/>
         </Grid>
 
-    </VerticalStackLayout>
-
+        <Label FontSize="18" HorizontalOptions="Center" Margin="0,5">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Welcome " TextColor="Maroon" />
+                    <Span Text="{Binding User.Username}" TextColor="#2A4D69" FontSize="18" FontAttributes="Bold" />
+                    <Span Text=" to " />
+                    <Span Text="{Binding User.Company}" TextTransform="Uppercase" FontAttributes="Bold" TextColor="Maroon" />
+                    <Span Text="." />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        
+        <VerticalStackLayout VerticalOptions="FillAndExpand" HorizontalOptions="Center" Spacing="20">
+            <Label Text="QUICK LINKS AND ACTIONS" FontSize="20" FontAttributes="Bold" TextColor="#2A4D69" HorizontalTextAlignment="Center" TextDecorations="Underline"/>
+            <!--MANAGE STAFF-->
+            <HorizontalStackLayout Spacing="30" HorizontalOptions="Center" IsVisible="{Binding ShowStaffMenu}">
+                <Frame HasShadow="True" WidthRequest="140">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="StaffViewAll" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout>
+                        <Image Source="staffs_view.png" HeightRequest="70" /> 
+                        <Label Text="View All Staffs" TextColor="#2A4D69" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame HasShadow="True" WidthRequest="140">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="StaffAddEdit" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout>
+                        <Image Source="staff_add.png" HeightRequest="70"/>
+                        <Label Text="Add New Staff" TextColor="#2A4D69" FontAttributes="Bold"  />
+                    </VerticalStackLayout>
+                </Frame>
+            </HorizontalStackLayout>
+            <!--MANAGE ACCESS-->
+            <HorizontalStackLayout Spacing="30" HorizontalOptions="Center" IsVisible="{Binding ShowStaffMenu}">
+                <Frame HasShadow="True" WidthRequest="140">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="UserAccessView" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout>
+                        <Image Source="user_access.png" HeightRequest="70" />
+                        <Label Text="View User Access" TextColor="#2A4D69" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame HasShadow="True" WidthRequest="140">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="StaffEditPermission" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout>
+                        <Image Source="edit_permission.png" HeightRequest="70" Margin="10,0,0,0"/>
+                        <Label Text="Edit Permission" TextColor="#2A4D69" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Frame>
+            </HorizontalStackLayout>
+            <!--MANAGE PATIENTS-->
+            <HorizontalStackLayout Spacing="30" HorizontalOptions="Center" IsVisible="{Binding ManagePatientMenuVisible}">
+                <Frame HasShadow="True" WidthRequest="140" IsVisible="{Binding ShowPatientViewMenu}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="PatientView" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout>
+                        <Image Source="patients_view.png" HeightRequest="70" />
+                        <Label Text="View Patient Records" TextColor="#2A4D69" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame HasShadow="True" WidthRequest="140" IsVisible="{Binding ShowPatientAddMenu}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="PatientAdd" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout>
+                        <Image Source="patient_add.png" HeightRequest="70"/>
+                        <Label Text="Add New Patient" TextColor="#2A4D69" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+                <!--PATIENT USER MY RECORD-->
+                <Frame HasShadow="True" WidthRequest="140" IsVisible="{Binding ShowPatientMyRecord}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MyCommand}" CommandParameter="PatientRecord" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout>
+                        <Image Source="patients_view.png" HeightRequest="70" />
+                        <Label Text="View My Record" TextColor="#2A4D69" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+  
+    </VerticalStackLayout> 
 </ContentView>
