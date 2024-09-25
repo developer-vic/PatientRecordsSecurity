@@ -65,8 +65,9 @@ public partial class StaffAddEdit : ContentView
             Title = !FieldsAreEnable ? "View Staff" : "Add New Staff";
             if (!string.IsNullOrEmpty(Staff.StaffId) && FieldsAreEnable)
             {
-                Title = "Edit Staff"; ConfirmPassword = Staff.Password;
+                Title = "Edit Staff"; 
             }
+            ConfirmPassword = Staff.Password;
             RunCommands(); InitializeData();
         }
 
