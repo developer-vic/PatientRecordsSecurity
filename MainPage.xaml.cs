@@ -1,4 +1,5 @@
-﻿using PatientRecordsSecurity.ContentViews;
+﻿using Newtonsoft.Json;
+using PatientRecordsSecurity.ContentViews;
 using PatientRecordsSecurity.Controls;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -62,6 +63,8 @@ namespace PatientRecordsSecurity
             ObservableCollection<Role> Roles = VUtils.GetRoles();
             Role role = Roles.Where(p => p.Name == User.Role).First();
             ObservableCollection<Permission> permissions = role.Permissions;
+            if(User.Role == "Custom")
+                permissions = JsonConvert.DeserializeObject<ObservableCollection<Permission>>(User.PermissionsSummary) ?? new ObservableCollection<Permission>();
             ShowStaffMenu = permissions.Where(p => p.Name == "Manage Staff").First().IsGranted;
             ShowPatientAddMenu = permissions.Where(p => p.Name == "Edit Patient Record").First().IsGranted;
             if (User.IsPatient)

@@ -18,7 +18,7 @@ public partial class StaffAddEdit : ContentView
         private string? username;
         private bool showLoading;
         private List<Staff> _staffList = new List<Staff>();
-
+        private string staffId;
 
         public ObservableCollection<string> Roles { get; } = new ObservableCollection<string>
         {
@@ -31,6 +31,7 @@ public partial class StaffAddEdit : ContentView
         };
         public string? SelectedDesignation { get => selectedDesignation; set { SetProperty(ref selectedDesignation, value); GenerateUsername(); } }
 
+        public string StaffId { get => staffId; set { SetProperty(ref staffId, value); } }
         public string? Username { get => username; set { SetProperty(ref username, value); } }
         private void GenerateUsername()
         {
@@ -45,6 +46,7 @@ public partial class StaffAddEdit : ContentView
                 }
                 totalDesn++;
                 Username = $"{designationCode}{totalDesn.ToString("D3")}";
+                StaffId = $"{designationCode}-{totalDesn.ToString("D3")}";
             }
         }
         public string? ConfirmPassword { get; set; }

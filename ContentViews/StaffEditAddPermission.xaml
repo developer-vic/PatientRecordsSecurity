@@ -2,7 +2,8 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:PatientRecordsSecurity.Controls"
-             x:Class="PatientRecordsSecurity.ContentViews.StaffEditAddPermission">
+             x:Class="PatientRecordsSecurity.ContentViews.StaffEditAddPermission"
+             x:Name="StaffPermissionPage">
 
     <ContentView.Resources>
         <ResourceDictionary>
@@ -31,7 +32,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding IsGranted}" IsEnabled="False" />
+                            <CheckBox IsChecked="{Binding IsGranted}" IsEnabled="{Binding BindingContext.EnableCheckBox, Source={x:Reference Name=StaffPermissionPage}}" />
                             <Label Text="{Binding Name}" VerticalOptions="Center" />
                         </StackLayout>
                     </DataTemplate>

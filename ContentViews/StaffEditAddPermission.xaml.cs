@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using PatientRecordsSecurity.Controls;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -21,6 +22,7 @@ public partial class StaffEditAddPermission : ContentView
         private Role? _selectedRole;
         private bool showLoading;
         private ObservableCollection<Staff> staffList = new ObservableCollection<Staff>();
+        private bool enableCheckBox;
 
         public string? StaffId
         {
@@ -61,7 +63,7 @@ public partial class StaffEditAddPermission : ContentView
 
         public ObservableCollection<Role> Roles { get; } = VUtils.GetRoles();
 
-
+        public bool EnableCheckBox { get => enableCheckBox; set { SetProperty(ref enableCheckBox, value); } }
         public Role? SelectedRole
         {
             get => _selectedRole;
@@ -70,13 +72,20 @@ public partial class StaffEditAddPermission : ContentView
                 SetProperty(ref _selectedRole, value);
                 Permissions.Clear();
                 if (_selectedRole != null)
-                    foreach (var permission in _selectedRole.Permissions)
+                {
+                    EnableCheckBox = _selectedRole.Permissions.Where(p => p.IsGranted == true).FirstOrDefault() == null;
+                    if (!EnableCheckBox)
+                        foreach (var permission in _selectedRole.Permissions)
+                            Permissions.Add(permission);
+                    else
                     {
-                        Permissions.Add(permission);
+                        var perms = JsonConvert.DeserializeObject<ObservableCollection<Permission>>(SelectedStaff?.PermissionsSummary ?? "") ?? new ObservableCollection<Permission>();
+                        foreach (var permission in perms) Permissions.Add(permission);
                     }
+                }
             }
         }
-        public ObservableCollection<Permission> Permissions { get; } = new ObservableCollection<Permission>();
+        public ObservableCollection<Permission> Permissions { get; set; } = new ObservableCollection<Permission>();
 
 
         public bool ShowLoading { get => showLoading; set { SetProperty(ref showLoading, value); } } 
@@ -89,7 +98,7 @@ public partial class StaffEditAddPermission : ContentView
         public StaffEditAddPermissionVM(string? __staffId, bool fieldsAreEnable)
         {
             InitializeData(__staffId); FieldsAreEnable = fieldsAreEnable;
-            Title = !FieldsAreEnable ? "View User Access" : "Add User Access";
+            Title = !FieldsAreEnable ? "View User Access" : "Grant Permissions";
             if ((__staffId == "" || __staffId != null) && FieldsAreEnable) Title = "Edit Permissions";
         }
 
@@ -120,6 +129,7 @@ public partial class StaffEditAddPermission : ContentView
             if (SelectedStaff != null && SelectedRole != null)
             {
                 SelectedStaff.Role = SelectedRole.Name;
+                SelectedStaff.PermissionsSummary = JsonConvert.SerializeObject(Permissions);
                 try
                 {
                     ShowLoading = true;

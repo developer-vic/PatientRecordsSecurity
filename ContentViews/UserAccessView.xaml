@@ -12,11 +12,11 @@
         <CollectionView ItemsSource="{Binding Staffs}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="10" ColumnDefinitions="*,*,*,*,Auto,Auto" ColumnSpacing="10">
+                    <Grid Padding="10" ColumnDefinitions="*,*,*,Auto,Auto" ColumnSpacing="10">
                         <Label Text="{Binding StaffId}" Grid.Column="0" VerticalOptions="Center" />
                         <Label Text="{Binding FullName}" Grid.Column="1" VerticalOptions="Center" />
                         <Label Text="{Binding Role}" Grid.Column="2" VerticalOptions="Center" />
-                        <Label Text="{Binding PermissionsSummary}" Grid.Column="3" VerticalOptions="Center" />
+                        <Label IsVisible="False" Text="{Binding PermissionsSummary}" Grid.Column="3" VerticalOptions="Center" />
                         <Button Text="View" Command="{Binding BindingContext.ViewStaffCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" CommandParameter="{Binding .}" Grid.Column="4" />
                         <Button Text="Edit" Command="{Binding BindingContext.EditStaffCommand, Source={RelativeSource AncestorType={x:Type ContentView}}}" CommandParameter="{Binding .}" Grid.Column="5" BackgroundColor="#34495e"/>
                     </Grid>
