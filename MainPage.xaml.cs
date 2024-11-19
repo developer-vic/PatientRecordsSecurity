@@ -70,7 +70,7 @@ namespace PatientRecordsSecurity
             ShowPatientAddMenu = permissions.Where(p => p.Name == "Edit Patient Record").First().IsGranted;
             if (User.IsPatient)
             {
-                ShowPatientMyRecord = true; _patient = await new FirebaseClass().GetPatientAsync(User.Username);
+                ShowPatientMyRecord = true; _patient = await new FirebaseClass().GetPatientAsync(User.Username)??new Patient();
             }
             else ShowPatientViewMenu = permissions.Where(p => p.Name == "View Patient Record").First().IsGranted;
         }

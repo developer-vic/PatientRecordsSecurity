@@ -18,20 +18,20 @@ public partial class StaffAddEdit : ContentView
         private string? username;
         private bool showLoading;
         private List<Staff> _staffList = new List<Staff>();
-        private string staffId;
+        private string? staffId = "";
 
         public ObservableCollection<string> Roles { get; } = new ObservableCollection<string>
         {
-            "Doctor", "Nurse", "Others"
+            "Doctor", "Nurse", "Others" 
         };
         public ObservableCollection<string> Designations { get; } = new ObservableCollection<string>
         {
-            "Gynecologist", "Pediatrician", "Psychiatrist", "Surgeon", "Cardiac Nurse",
-            "Orthopedic Nurse", "Labor & Delivery Nurse"
+            "Gynecologist", "Pediatrician", "Psychiatrist", "Surgeon", 
+            "Cardiac Nurse", "Orthopedic Nurse", "Labor & Delivery Nurse"  
         };
         public string? SelectedDesignation { get => selectedDesignation; set { SetProperty(ref selectedDesignation, value); GenerateUsername(); } }
 
-        public string StaffId { get => staffId; set { SetProperty(ref staffId, value); } }
+        public string? StaffId { get => staffId; set { SetProperty(ref staffId, value); } }
         public string? Username { get => username; set { SetProperty(ref username, value); } }
         private void GenerateUsername()
         {
@@ -63,14 +63,14 @@ public partial class StaffAddEdit : ContentView
         {
             _IS_NEW = staff == null || string.IsNullOrEmpty(staff.StaffId);
             Staff = staff ?? new Staff(); FieldsAreEnable = fieldsAreEnable;
+            StaffId = staff?.StaffId ?? "";
             Username = Staff.Username; SelectedDesignation = Staff.Designation;
             Title = !FieldsAreEnable ? "View Staff" : "Add New Staff";
             if (!string.IsNullOrEmpty(Staff.StaffId) && FieldsAreEnable)
             {
                 Title = "Edit Staff"; 
             }
-            ConfirmPassword = Staff.Password;
-            RunCommands(); InitializeData();
+            ConfirmPassword = Staff.Password; RunCommands(); InitializeData();
         }
 
         private async void InitializeData()
@@ -113,7 +113,8 @@ public partial class StaffAddEdit : ContentView
                 Staff.Username = Username ?? ""; Staff.Phone = Staff.Email;
                 Staff.Company = VUtils.LoggedInUser?.Company ?? "";
                 Staff.Designation = SelectedDesignation ?? "";
-                ShowLoading = true;
+                Staff.StaffId = StaffId ?? ""; ShowLoading = true;
+
                 string errMsg = await VUtils.StaffFieldsAreValid(Staff, _IS_NEW);
                 if (string.IsNullOrEmpty(errMsg))
                 {

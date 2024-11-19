@@ -37,15 +37,22 @@ namespace PatientRecordsSecurity.Controls
                 return new List<Patient>();
             }
         }
-        public async Task<Patient> GetPatientAsync(string patientID)
+        public async Task<Patient?> GetPatientAsync(string patientID)
         {
-            var patient = await _firebaseClient
-                .Child(MATRIC_NO)
-                .Child("patients")
-                .Child(patientID)
-                .OnceSingleAsync<Patient>();
+            try
+            { 
+                var patient = await _firebaseClient
+                    .Child(MATRIC_NO)
+                    .Child("patients")
+                    .Child(patientID)
+                    .OnceSingleAsync<Patient>();
 
-            return patient;
+                return string.IsNullOrEmpty(patient?.PatientID) ? null : patient;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
         public async Task DeletePatientAsync(string patientID)
         {
@@ -85,13 +92,13 @@ namespace PatientRecordsSecurity.Controls
         {
             try
             {
-                var patient = await _firebaseClient
+                var staff = await _firebaseClient
                     .Child(MATRIC_NO)
                     .Child("staffs")
                     .Child(staffID)
                     .OnceSingleAsync<Staff>();
 
-                return patient;
+                return string.IsNullOrEmpty(staff?.StaffId) ? null : staff;
             }
             catch (Exception)
             {

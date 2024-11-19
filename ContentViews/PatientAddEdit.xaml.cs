@@ -75,8 +75,7 @@ public partial class PatientAddEdit : ContentView
                 string errMsg = await VUtils.PatientFieldsAreValid(Patient, _IS_NEW);
                 if (string.IsNullOrEmpty(errMsg))
                 {
-                    if (Patient.Password != ConfirmPassword)
-                        VUtils.ToastText("Password do not match");
+                    if (Patient.Password != ConfirmPassword) VUtils.ToastText("Password do not match");
                     else
                     {
                         await new FirebaseClass().SaveUpdatePatientAsync(Patient);
