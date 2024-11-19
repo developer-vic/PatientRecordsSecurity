@@ -22,7 +22,7 @@ public partial class StaffEditAddPermission : ContentView
         private Role? _selectedRole;
         private bool showLoading;
         private ObservableCollection<Staff> staffList = new ObservableCollection<Staff>();
-        private bool enableCheckBox;
+        private bool enableCheckBox=true;
 
         public string? StaffId
         {
@@ -69,19 +69,19 @@ public partial class StaffEditAddPermission : ContentView
             get => _selectedRole;
             set
             {
-                SetProperty(ref _selectedRole, value);
-                Permissions.Clear();
+                SetProperty(ref _selectedRole, value); Permissions.Clear();
                 if (_selectedRole != null)
                 {
-                    EnableCheckBox = _selectedRole.Permissions.Where(p => p.IsGranted == true).FirstOrDefault() == null;
-                    if (!EnableCheckBox)
-                        foreach (var permission in _selectedRole.Permissions)
-                            Permissions.Add(permission);
-                    else
+                    //EnableCheckBox = true;
+                    if (!string.IsNullOrEmpty(SelectedStaff?.PermissionsSummary) && !SelectedStaff.IsPatient)
                     {
-                        var perms = JsonConvert.DeserializeObject<ObservableCollection<Permission>>(SelectedStaff?.PermissionsSummary ?? "") ?? new ObservableCollection<Permission>();
-                        foreach (var permission in perms) Permissions.Add(permission);
+                        var perms = JsonConvert.DeserializeObject<ObservableCollection<Permission>>(SelectedStaff.PermissionsSummary);
+                        foreach (var permission in perms ?? []) Permissions.Add(permission);
                     }
+                    else
+                    { 
+                        foreach (var permission in _selectedRole.Permissions) Permissions.Add(permission);
+                    } 
                 }
             }
         }

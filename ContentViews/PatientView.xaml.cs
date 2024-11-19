@@ -61,8 +61,9 @@ public partial class PatientView : ContentView
             var User = VUtils.LoggedInUser;
             Role role = Roles.Where(p => p.Name == User.Role).First();
             ObservableCollection<Permission> permissions = role.Permissions;
-            if (User.Role == "Custom")
+            if (!string.IsNullOrEmpty(User.PermissionsSummary) && !User.IsPatient)
                 permissions = JsonConvert.DeserializeObject<ObservableCollection<Permission>>(User.PermissionsSummary) ?? new ObservableCollection<Permission>();
+            
             ShowPatientAddMenu = permissions.Where(p => p.Name == "Edit Patient Record").First().IsGranted;
             ShowPatientDeleteMenu = permissions.Where(p => p.Name == "Delete Patient Record").First().IsGranted;
             ShowLoading = true;

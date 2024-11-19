@@ -86,13 +86,13 @@ namespace PatientRecordsSecurity.Controls
         {
             return new ObservableCollection<Role>
         {
-            new Role { Name = "Custom", Permissions = new ObservableCollection<Permission>
-                {
-                    new Permission { Name = "View Patient Record", IsGranted = false },
-                    new Permission { Name = "Edit Patient Record", IsGranted = false },
-                    new Permission { Name = "Delete Patient Record", IsGranted = false },
-                    new Permission { Name = "Manage Staff", IsGranted = false }
-                }},
+            //new Role { Name = "Custom", Permissions = new ObservableCollection<Permission>
+            //    {
+            //        new Permission { Name = "View Patient Record", IsGranted = false },
+            //        new Permission { Name = "Edit Patient Record", IsGranted = false },
+            //        new Permission { Name = "Delete Patient Record", IsGranted = false },
+            //        new Permission { Name = "Manage Staff", IsGranted = false }
+            //    }},
             new Role { Name = "Doctor", Permissions = new ObservableCollection<Permission>
                 {
                     new Permission { Name = "View Patient Record", IsGranted = true },

@@ -19,7 +19,7 @@ namespace PatientRecordsSecurity.Controls
         public string Company { get; set; } = "";
         public string PermissionsSummary { get; set; } = "";
 
-        public string FullName => $"{FirstName} {LastName}";
+        public string FullName => $"{FirstName} {LastName}"; 
         public bool IsAdmin => Role == "Doctor";
         public bool IsNotAdmin => Role != "Doctor";
         public bool IsPatient => Designation == "Patient";
